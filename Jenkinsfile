@@ -60,8 +60,8 @@ pipeline {
                         sh """
                             cat > .env <<EOF
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
-MYSQL_DATABASE=attractions_db
-MYSQL_USER=attractions_user
+MYSQL_DATABASE=devices_db
+MYSQL_USER=Lukax
 MYSQL_PASSWORD=${MYSQL_PASS}
 MYSQL_PORT=3306
 PHPMYADMIN_PORT=8888
@@ -121,7 +121,7 @@ EOF
                         timeout 60 bash -c 'until curl -f http://localhost:3001/health; do sleep 2; done' || exit 1
 
                         # Check attractions endpoint
-                        curl -f http://localhost:3001/attractions || exit 1
+                        curl -f http://localhost:3001/devices || exit 1
 
                         echo "Health check passed!"
                     """
@@ -145,7 +145,7 @@ EOF
                         echo ""
                         echo "=== Deployed Services ==="
                         echo "Frontend: http://localhost:3000"
-                        echo "API: http://localhost:3001"
+                        echo "API: http://localhost:3001/devices"
                         echo "phpMyAdmin: http://localhost:8888"
                     """
                 }
